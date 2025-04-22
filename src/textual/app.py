@@ -3055,6 +3055,10 @@ class App(Generic[ReturnType], DOMNode):
             from textual.drivers.linux_inline_driver import LinuxInlineDriver
 
             driver_class = LinuxInlineDriver
+        elif inline and WINDOWS:
+            from textual.drivers.windows_inline_driver import WindowsInlineDriver
+
+            driver_class = WindowsInlineDriver
         else:
             driver_class = self.driver_class
 
