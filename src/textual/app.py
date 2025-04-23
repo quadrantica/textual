@@ -3215,10 +3215,11 @@ class App(Generic[ReturnType], DOMNode):
                         if self._driver.is_inline:
                             cursor_x, cursor_y = self._previous_cursor_position
                             self._driver.write(
-                                Control.move(-cursor_x, -cursor_y + 1).segment.text
+                                Control.move(0, -cursor_y-1).segment.text
                             )
+                            console = Console()
+                            console.print()
                             if inline_no_clear and not self.app._exit_renderables:
-                                console = Console()
                                 try:
                                     console.print(self.screen._compositor)
                                 except ScreenStackError:
@@ -3226,9 +3227,10 @@ class App(Generic[ReturnType], DOMNode):
                             else:
                                 self._driver.write(
                                     Control.move(
-                                        -cursor_x, -self.INLINE_PADDING - 1
+                                        0, -self.INLINE_PADDING - 1
                                     ).segment.text
                                 )
+                                console.print()
 
                         driver.stop_application_mode()
             except Exception as error:
